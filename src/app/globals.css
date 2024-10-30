@@ -2,15 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #303030;
-  --foreground: #303030;
-}
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #303030;
-    --foreground: #303030;
+    --background: #03020b;
   }
 }
 
@@ -18,3 +13,10 @@ body {
   background: var(--background);
   font-family:  Helvetica, sans-serif;
 }
+
+.gradient-border {
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to right, #00000000, #18CD88, #00000000);
+}
+
+
