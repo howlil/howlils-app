@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
 
 interface SkillItemProps {
   name: string;
@@ -10,11 +9,7 @@ interface SkillItemProps {
 }
 
 export function SkillItem({ name, index, category }: SkillItemProps) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  
 
   return (
     <motion.div

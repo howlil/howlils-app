@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 
@@ -17,11 +16,7 @@ export function ProfileHeader({
   description,
   avatar,
 }: ProfileHeaderProps) {
-  const [mounted, setMounted] = useState(false);
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   return (
     <motion.div

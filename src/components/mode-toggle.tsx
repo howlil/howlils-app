@@ -7,7 +7,8 @@ import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-interface ModeToggleProps extends React.HTMLAttributes<HTMLDivElement> {}
+type ModeToggleProps = React.HTMLAttributes<HTMLDivElement>;
+
 
 export function ModeToggle({ className, ...props }: ModeToggleProps) {
   const { setTheme, theme } = useTheme();
