@@ -2,7 +2,6 @@
 const nextConfig = {
   reactStrictMode: true,
   experimental: {
-    optimizeFonts: true,
     scrollRestoration: true
   },
   images: {

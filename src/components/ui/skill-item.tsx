@@ -5,12 +5,9 @@ import { motion } from "framer-motion";
 interface SkillItemProps {
   name: string;
   index: number;
-  category?: string;
 }
 
-export function SkillItem({ name, index, category }: SkillItemProps) {
-  
-
+export function SkillItem({ name, index }: SkillItemProps) {
   return (
     <motion.div
       className="inline-block mr-2 mb-2"

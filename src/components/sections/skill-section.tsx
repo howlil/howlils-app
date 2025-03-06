@@ -17,19 +17,16 @@ interface SkillsByCategory {
 interface SkillsSectionProps {
   skills: (string | Skill)[];
   defaultCategory?: string;
-  colorByCategory?: boolean;
 }
 
 export function SkillsSection({ 
   skills, 
-  defaultCategory = "All",
-  colorByCategory = true
+  defaultCategory = "All"
 }: SkillsSectionProps) {
   const [mounted, setMounted] = useState(false);
   const [skillsByCategory, setSkillsByCategory] = useState<SkillsByCategory>({});
   const [categories, setCategories] = useState<string[]>([]);
   const [activeCategory, setActiveCategory] = useState<string>(defaultCategory);
-  const [allSkills, setAllSkills] = useState<string[]>([]);
 
   useEffect(() => {
     setMounted(true);
@@ -70,7 +67,6 @@ export function SkillsSection({
     
     setSkillsByCategory(categorized);
     setCategories(sortedCategories);
-    setAllSkills(all);
     setActiveCategory("All");
   }, [skills, defaultCategory]);
 
@@ -127,7 +123,6 @@ export function SkillsSection({
               key={`${skill}-${index}`} 
               name={skill} 
               index={index}
-              category={colorByCategory ? activeCategory !== "All" ? activeCategory : undefined : undefined}
             />
           ))}
         </motion.div>

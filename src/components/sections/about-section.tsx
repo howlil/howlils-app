@@ -37,7 +37,7 @@ export function AboutSection({ intro, highlights, conclusion, buildspace }: Abou
       </motion.h2>
       
       <motion.div 
-        className=" dark:bg-gray-900 rounded-lg "
+        className="  "
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5, delay: 0.1 }}
