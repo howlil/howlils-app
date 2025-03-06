@@ -22,12 +22,12 @@ export interface DockProps extends VariantProps<typeof dockVariants> {
   children: React.ReactNode;
 }
 
-const DEFAULT_SIZE = 40;
+const DEFAULT_SIZE = 35;
 const DEFAULT_MAGNIFICATION = 60;
 const DEFAULT_DISTANCE = 140;
 
 const dockVariants = cva(
-  "supports-backdrop-blur:bg-white/10 supports-backdrop-blur:dark:bg-black/10 mx-auto mt-8 flex h-[58px] w-max items-center justify-center gap-2 rounded-2xl border p-2 backdrop-blur-md",
+  "supports-backdrop-blur:bg-white/10 supports-backdrop-blur:dark:bg-black/10 mx-auto mt-8 flex h-[44px] w-max items-center justify-center gap-2 rounded-2xl border p-2 backdrop-blur-sm",
 );
 
 const Dock = React.forwardRef<HTMLDivElement, DockProps>(
@@ -101,7 +101,7 @@ const DockIcon = ({
   ...props
 }: DockIconProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const padding = Math.max(6, size * 0.2);
+  const padding = Math.max(2, size * 0.2);
   const defaultMouseX = useMotionValue(Infinity);
 
   const distanceCalc = useTransform(mouseX ?? defaultMouseX, (val: number) => {
@@ -117,7 +117,7 @@ const DockIcon = ({
 
   const scaleSize = useSpring(sizeTransform, {
     mass: 0.1,
-    stiffness: 150,
+    stiffness: 100,
     damping: 12,
   });
 

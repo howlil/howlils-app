@@ -36,7 +36,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="mx-auto sm:mx-auto max-w-3xl px-6 py-6 sm:px-24 md:py-12">
+          <main className="mx-auto sm:mx-auto  px-6 py-6 sm:px-24 md:py-24">
             {children}
           </main>
           <nav className="fixed left-1/2 transform -translate-x-1/2 bottom-10">

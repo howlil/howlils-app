@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SkillItem } from "../ui/skill-item";
 
 interface Skill {
@@ -10,65 +9,31 @@ interface Skill {
   category: string;
 }
 
-interface SkillsByCategory {
-  [category: string]: string[];
-}
 
 interface SkillsSectionProps {
   skills: (string | Skill)[];
-  defaultCategory?: string;
 }
 
 export function SkillsSection({ 
   skills, 
-  defaultCategory = "All"
 }: SkillsSectionProps) {
   const [mounted, setMounted] = useState(false);
-  const [skillsByCategory, setSkillsByCategory] = useState<SkillsByCategory>({});
-  const [categories, setCategories] = useState<string[]>([]);
-  const [activeCategory, setActiveCategory] = useState<string>(defaultCategory);
+  const [skillsList, setSkillsList] = useState<string[]>([]);
 
   useEffect(() => {
     setMounted(true);
 
-    // Organize skills by category
-    const categorized: SkillsByCategory = {};
-    const all: string[] = [];
-    
-    skills.forEach((skill) => {
+    // Flatten skills into a single array
+    const allSkills: string[] = skills.map((skill) => {
       if (typeof skill === 'string') {
-        // Handle plain string skills (assign to default category)
-        if (!categorized[defaultCategory]) {
-          categorized[defaultCategory] = [];
-        }
-        categorized[defaultCategory].push(skill);
-        all.push(skill);
+        return skill;
       } else {
-        // Handle skills with explicit categories
-        const { name, category } = skill;
-        if (!categorized[category]) {
-          categorized[category] = [];
-        }
-        categorized[category].push(name);
-        all.push(name);
+        return skill.name;
       }
     });
     
-    // Add "All" category with all skills
-    categorized["All"] = all;
-    
-    // Sort categories alphabetically, but keep "All" first
-    const sortedCategories = Object.keys(categorized).sort();
-    const allIndex = sortedCategories.indexOf("All");
-    if (allIndex > 0) {
-      sortedCategories.splice(allIndex, 1);
-      sortedCategories.unshift("All");
-    }
-    
-    setSkillsByCategory(categorized);
-    setCategories(sortedCategories);
-    setActiveCategory("All");
-  }, [skills, defaultCategory]);
+    setSkillsList(allSkills);
+  }, [skills]);
 
   return (
     <motion.section 
@@ -86,29 +51,6 @@ export function SkillsSection({
         >
           Skills
         </motion.h2>
-        
-        {mounted && categories.length > 1 && (
-          <div className="mt-2 sm:mt-0">
-            <Tabs 
-              defaultValue="All" 
-              value={activeCategory}
-              onValueChange={setActiveCategory}
-              className="w-full"
-            >
-              <TabsList className="grid grid-flow-col auto-cols-max gap-1 overflow-x-auto">
-                {categories.map((category) => (
-                  <TabsTrigger 
-                    key={category} 
-                    value={category}
-                    className="text-xs sm:text-sm px-2 py-1"
-                  >
-                    {category}
-                  </TabsTrigger>
-                ))}
-              </TabsList>
-            </Tabs>
-          </div>
-        )}
       </div>
       
       {mounted && (
@@ -118,7 +60,7 @@ export function SkillsSection({
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
         >
-          {skillsByCategory[activeCategory]?.map((skill, index) => (
+          {skillsList.map((skill, index) => (
             <SkillItem 
               key={`${skill}-${index}`} 
               name={skill} 

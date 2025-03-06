@@ -1,0 +1,59 @@
+---
+title: "Chat Collect - Email Collection for GPTs"
+description: "A SaaS platform that allows GPT creators to collect emails from their users"
+date: "2024-02-28"
+---
+
+# Chat Collect
+
+## Project Overview
+
+Chat Collect adalah aplikasi SaaS yang memungkinkan pengembang GPT untuk mengumpulkan alamat email dari pengguna GPT mereka. Dengan rilis GPT Store dari OpenAI, ini menjadi cara penting bagi kreator untuk membangun audiens.
+
+## Fitur Utama
+
+- Pengumpulan email dari pengguna GPT
+- Dashboard analitik
+- Integrasi API sederhana
+- Ekspor data
+
+## Implementasi Teknis
+
+Berikut adalah contoh kode untuk endpoint pengumpulan email:
+
+```typescript
+// API endpoint untuk pengumpulan email
+app.post('/api/collect', async (req, res) => {
+  try {
+    const { email, gptId, metadata } = req.body;
+    
+    // Validasi API key
+    const apiKey = req.headers.authorization?.split(' ')[1];
+    const creator = await validateApiKey(apiKey);
+    
+    if (!creator) {
+      return res.status(401).json({ error: 'Invalid API key' });
+    }
+    
+    // Validasi format email
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ error: 'Invalid email format' });
+    }
+    
+    // Simpan email
+    await db.emails.create({
+      data: {
+        email,
+        gptId,
+        creatorId: creator.id,
+        metadata: metadata || {},
+        collectedAt: new Date()
+      }
+    });
+    
+    return res.status(201).json({ success: true });
+  } catch (error) {
+    console.error('Error collecting email:', error);
+    return res.status(500).json({ error: 'Internal server error' });
+  }
+});

@@ -176,6 +176,33 @@ export const PORTFOLIO_DATA = {
       ],
     },
   ],
+  organizations: [
+    {
+      organization: "GDSC Andalas University",
+      role: "Core Member Front End",
+      period: "2023 - Present",
+      logo: "/logos/gdsc.png",
+      description: "Active member of Google Developer Student Clubs focusing on front-end development, teaching, and mentoring other students.",
+      achievements: [
+        "Developed a comprehensive 7-module curriculum for internal studies and Study Jams, enhancing participants' knowledge in front-end development",
+        "Led educational sessions on HTML, CSS, and React.js for a study group of 3 members, improving their proficiency and ensuring successful project completion",
+        "Conducted a hands-on React.js workshop for 25 participants covering development, state management, and live deployment, which enhanced practical skills and understanding"
+      ]
+    },
+    {
+      organization: "Better Day Project 3.0",
+      role: "Participant",
+      period: "2023",
+      logo: "/logos/betterday.png",
+      description: "Participated in the Better Day Project 3.0 Business Idea Competition, securing 3rd place nationally.",
+      achievements: [
+        "Developed an innovative business concept addressing real-world problems",
+        "Created comprehensive business model and go-to-market strategy",
+        "Delivered compelling pitch presentation to panel of industry judges"
+      ]
+    }
+  ],
+  
   skills: [
     { name: "JavaScript", category: " Languages" },
     { name: "TypeScript", category: " Languages" },
