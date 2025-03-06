@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import GridBackground from "@/components/ui/Grid";
+import { DockNavigation } from "@/components/ui/dock-navigation";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,15 +28,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`sm:mx-24 mx-8 ${geistSans.variable} overflow-hidden ${geistMono.variable} antialiased`}
+        className={` ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-       <GridBackground size={96} lineColor="rgba(247, 247, 247, 0.1)" opacity="0.5" />
-        <nav className="flex mt-6 justify-center">
-          <Navbar />
-        </nav>
-        <main className="mt-12">
-        {children}
-        </main>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <main className="mx-auto sm:mx-auto max-w-3xl px-6 py-6 sm:px-24 md:py-12">
+            {children}
+          </main>
+          <nav className="fixed left-1/2 transform -translate-x-1/2 bottom-10">
+            <DockNavigation />
+          </nav>
+        </ThemeProvider>
       </body>
     </html>
   );

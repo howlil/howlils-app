@@ -1,28 +1,36 @@
-import Image from "next/image";
-import ProfileUser from "@/components/Home/ProfileUser";
-import Vector from "../../public/vector.svg";
-import Summary from "@/components/Home/Summary";
-import Skill from "@/components/Home/Skill";
-import BadgeSocialMedia from "@/components/Home/BadgeSocialMedia";
+// app/page.tsx
+"use client";
+
+import { ProfileHeader } from "@/components/sections/profile-header";
+import { AboutSection } from "@/components/sections/about-section";
+import { PORTFOLIO_DATA } from "@/data/portfolio-data";
+import { ExperienceSection } from "@/components/sections/experience-section";
+import { SkillsSection } from "@/components/sections/skill-section";
+import { EducationSection } from "@/components/sections/education-section";
 
 export default function Home() {
+  const { profile, about, experience, education, skills } = PORTFOLIO_DATA;
+
   return (
     <>
-      <section className="grid relative z-10 grid-cols-2 gap-4 ">
-        <div className="space-y-4">
-          <ProfileUser />
-          <Summary />
-        </div>
-        <div className="space-y-4">
-          <Skill />
-          <BadgeSocialMedia />
-        </div>
-      </section>
-      <Image
-        src={Vector}
-        alt="vec"
-        className="absolute blur-xl z-0 -bottom-64 -right-12"
+      <ProfileHeader
+        name={profile.name}
+        title={profile.title}
+        description={profile.description}
+        avatar={profile.avatar}
       />
+
+      <AboutSection
+        intro={about.intro}
+        highlights={about.highlights}
+        conclusion={about.conclusion}
+        buildspace={about.buildspace}
+      />
+
+      <ExperienceSection experiences={experience} />
+      <EducationSection educations={education} />
+
+      <SkillsSection skills={skills} defaultCategory="general" />
     </>
   );
 }
